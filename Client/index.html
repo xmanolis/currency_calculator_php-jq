@@ -1,0 +1,197 @@
+<!DOCTYPE HTML>
+
+<!--
+Created by Xatziemmanouil Manolis
+July 2014
+
+Client Side:Index File. User selects what currency would like to convert
+
+Template designed by HTML5 UP
+Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+
+<html>
+<head>
+    <title>Currency Converter</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta name="author" content="Manolis Xatziemmanouil">
+    <meta http-equiv="Lang" content="en">
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600" rel="stylesheet" type="text/css"/>
+
+    <!--[if lte IE 8]>
+    <script src="js/libs/html5shiv.js"></script><![endif]-->
+
+    <noscript>
+        <link rel="stylesheet" href="css/skel-noscript.css"/>
+        <link rel="stylesheet" href="css/style.css"/>
+        <link rel="stylesheet" href="css/style-wide.css"/>
+    </noscript>
+
+    <!--[if lte IE 9]>
+    <link rel="stylesheet" href="css/ie9.css"/><![endif]-->
+
+    <!--[if lte IE 8]>
+    <link rel="stylesheet" href="css/ie8.css"/><![endif]-->
+
+</head>
+<body>
+
+
+<!-- Header -->
+<div id="header" class="skel-panels-fixed">
+    <div class="top">
+        <!-- Logo -->
+        <div id="logo">
+            <span class="image avatar48"><img src="images/avatar.jpg" alt=""/></span>
+            <h1 id="title">Xatziemmanouil Manolis</h1>
+            <span class="byline">PHP Developer</span>
+        </div>
+
+        <!-- Nav -->
+        <nav id="nav">
+            <ul>
+                <li><a href="#top" id="top-link" class="skel-panels-ignoreHref"><span class="fa fa-home">Intro</span></a></li>
+                <li><a href="#app" id="app-link" class="skel-panels-ignoreHref"><span class="fa fa-th">Project</span></a></li>
+                <li><a href="#documentation" id="documentation-link" class="skel-panels-ignoreHref"><span class="fa fa-file">Documentation</span></a></li>
+            </ul>
+        </nav>
+
+    </div>
+    <div class="bottom">
+        <!-- Social Icons -->
+        <ul class="icons">
+            <li><a href="mailto: manolis@xman.gr" class="fa fa-envelope solo"><span>Email</span></a></li>
+        </ul>
+    </div>
+</div>
+
+<!-- Main -->
+<div id="main">
+
+    <!-- Intro -->
+    <section id="top" class="one">
+        <div class="container">
+            <a href="#" class="image featured"><img src="images/pic01.jpg" alt=""/></a>
+            <header>
+                <h2 class="alt">This is <strong>Currency Converter</strong>.</h2>
+            </header>
+
+            <p>Currency Converter is a small php application, developed for any person concerned wants
+                to see my code's quality.</p>
+
+            <footer>
+                <a href="#app" class="button scrolly">Scroll Down</a>
+            </footer>
+
+        </div>
+    </section>
+
+    <!-- Application -->
+    <section id="app" class="two">
+        <div class="container">
+            <header>
+                <h2>The Application</h2>
+            </header>
+
+            <div class="row">
+                <div class="6u">
+                    <article class="item">
+                        <input type="text" value="0" id="from_number" onblur="take_currency()"/>
+                        <select id="from_currency">
+                        </select>
+                    </article>
+                </div>
+
+                <div class="6u">
+                    <article class="item">
+                        <input readonly="readonly" type="text" id="to_number"/>
+                        <select id="to_currency">
+                        </select>
+                    </article>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="12u">
+                    <article class="item">
+                        <div id="result"></div>
+                    </article>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="12u">
+                    <article class="item">
+                        <button class="button" type="button" onclick="take_currency()">Convert</button>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Documentation -->
+    <section id="documentation" class="three">
+        <div class="container">
+            <header>
+                <h2>Documentation</h2>
+            </header>
+
+            <p>Currency Converter is a small php application, developed for any person concerned wants
+                to see my code's quality.</p>
+            <p>
+                There are a lot of ways to build such an easy small project. It could be developed using
+                just html and javascript(jquery, angular), but I have this project as a demo for my php
+                knowledges.
+
+                As it happens mostly to the real world, I have developed this using the Web Service
+                philosophy. Ιn general, Server makes available its services through
+                <a href="http://currencyconverter.xman.gr/Server/index.php?wsdl" target="_blank">wsdl file</a>(s),
+                client connects to server through SOAP.
+            </p>
+            <hr>
+            <p>This Application has two parts: Server and Client Part.</p>
+            <p>Server Side makes available this service through
+                <a href="http://currencyconverter.xman.gr/Server/index.php?wsdl" target="_blank">wsdl</a>
+                file. It connects to query.yahooapis.com and submits all queries that receives from client.
+                The way that this application is developed, make it too easy to add/remove currencies.
+                Server uses 2 classes. Class "currencies" is responsible for taking currencies rates
+                from internet and return them. Class "currency_service" is responsible for taking user
+                values, convert them and return them. It's also responsible for running the web service.
+                Available currencies can change from "currency_service" class.
+            </p>
+
+            <p>Client connects to Server through SOAP using PHP. The usage of PHP happens because I
+                had to predict the chance of the client being into a different server and I wouldn't
+                like to make cross-domain ajax connections.<br> When page loads, it connects to Server,
+                for to take the available currencies and put them into the select menus. Then, when
+                user wants a currency conversion, client posts data to server and then show the result.
+            </p>
+
+            <p>Both Server and Client Sides uses NuSoap Tools.</p>
+
+            <p>Hours spent: I needed a few hours for me to find this template and I needed 2 to 3 hours
+                to build the functionalities. </p>
+
+        </div>
+    </section>
+</div>
+
+<!-- Footer -->
+<div id="footer">
+    <!-- Copyright -->
+    <div class="copyright">
+        <ul class="menu">
+            <li>Created: <a href="http://xman.gr">Xatziemmanouil Manolis</a></li>
+            <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+        </ul>
+    </div>
+</div>
+
+<script src="js/libs/jquery.min.js"></script>
+<script src="js/libs/skel.min.js"></script>
+<script src="js/libs/skel-panels.min.js"></script>
+<script src="js/libs/template-init.js"></script>
+<script src="js/converter.js"></script>
+
+</body>
+</html>
