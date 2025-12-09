@@ -1,0 +1,9 @@
+{
+  "name": "xmanolis/currency-converter",
+  "description": "Small PHP demo application showing my skills. No framework, no dependencies.",
+  "type": "project",
+  "require": {
+    "php": "^8.0"
+  },
+  "license": "MIT"
+}

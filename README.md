@@ -1,14 +1,44 @@
-# currency_calculator_php-jq
-Currency Converter is a small simple php application, developed for any person concerned who would like to see the quality of my code.
+# PHP Currency Converter (JSON API + Proxy)
 
-# Server Side
-Server Side makes available its service through wsdl file. It connects to free.currencyconverterapi.com and submits all queries that receives from client. The way that this application is developed, make it too easy to add/remove currencies. Server uses 2 classes. Class "currencies" is responsible for taking currencies rates from internet and return them. Class "currency_service" is responsible for taking user values, convert them and return them. It's also responsible for running the web service. Available currencies can change from "currency_service" class.
+The goal of the project is to show architecture commonly used in real world applications and how I can
+write PHP code without the help of a framework or other dependencies.
+---
 
-# Client Side
-Client connects to Server through SOAP using PHP. The usage of PHP happens because I had to predict the chance of the client being into a different server and I wouldn't like to make cross-domain ajax connections.
-When page loads, it connects to Server, for to take the available currencies and put them into the select menus. Then, when user wants a currency conversion, client posts data to server and then the result is displayed.
+## Server Side (Internal API)
 
-Both Server and Client Sides uses NuSoap Tools.
+The server-side code is located in the `/service` folder.  
+This part of the project exposes a simple JSON API with two endpoints:
 
-# 
-In case you would like to use it for yourself for whatever reason, be advised that the service responsible for the actual ratings requires frequently updating. You can get an API KEY from https://www.currencyconverterapi.com/ and place it in /Server/services/freeRating.php file, in $service_currencies variable.
+- `/service/available_currencies.php`
+- `/service/converter.php`
+
+The internal API fetches live currency rates from a free external service
+and returns the results in a clean JSON format.
+
+---
+
+## Proxy Layer
+
+The `/proxy` folder contains two small PHP files that act as a backend-for-frontend (BFF).  
+The frontend sends requests to `/proxy/...`, and the proxy forwards them to the internal API.
+
+This way we avoid the CORS issues and, also, we hide the API from the browser.
+
+---
+
+## Client Side
+
+The client is located in the `/public` folder.  
+It contains the user-facing HTML and JavaScript.
+
+The JS code sends requests to the proxy layer, which then communicates with the JSON API.
+
+---
+
+## How to Run
+
+1. Place the project in any PHP-enabled environment.
+2. Open `/public/index.html` in the browser.
+3. The converter will communicate with the proxy and internal service automatically.
+
+This project is intentionally kept simple to focus on code clarity and architecture.

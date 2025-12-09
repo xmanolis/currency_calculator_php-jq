@@ -6,9 +6,9 @@
  *
  * This class is responsible for taking currencies rates from internet and return them
  */
-namespace Services\CurrenciesRates;
+namespace Api\CurrenciesRates;
 
-class freeRating
+class CurrencyConverterApi
 {
     private $service_currencies = 'https://free.currconv.com/api/v7/convert?q=%s&compact=ultra&apiKey=no_sharing';
 

@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 
 <!--
-Created by Xatziemmanouil Manolis
+Created by Manolis Xatziemmanouil
 July 2014
 
 Client Side:Index File. User selects what currency would like to convert
@@ -16,7 +16,7 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
     <meta name="author" content="Manolis Xatziemmanouil">
     <meta http-equiv="Lang" content="en">
-    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600" rel="stylesheet" type="text/css"/>
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600" rel="stylesheet" type="text/css"/>
 
     <!--[if lte IE 8]>
     <script src="js/libs/html5shiv.js"></script><![endif]-->
@@ -43,8 +43,8 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
         <!-- Logo -->
         <div id="logo">
             <span class="image avatar48"><img src="images/avatar.jpg" alt=""/></span>
-            <h1 id="title">Xatziemmanouil Manolis</h1>
-            <span class="byline">PHP Developer</span>
+            <h1 id="title">Manolis Xatziemmanouil</h1>
+            <span class="byline">Senior PHP Developer</span>
         </div>
 
         <!-- Nav -->
@@ -58,9 +58,9 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
 
     </div>
     <div class="bottom">
-        <!-- Social Icons -->
         <ul class="icons">
             <li><a href="mailto: manolis@xman.gr" class="fa fa-envelope solo"><span>Email</span></a></li>
+            <li><a href="https://github.com/xmanolis/currency_calculator_php-jq" class="fa fa-github solo"><span>Github</span></a></li>
         </ul>
     </div>
 </div>
@@ -96,17 +96,15 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
             <div class="row">
                 <div class="6u">
                     <article class="item">
-                        <input type="text" value="0" id="from_number" onblur="take_currency()"/>
-                        <select id="from_currency">
-                        </select>
+                        <input type="text" value="0" id="from_number" onblur="get_currency_rate()"/>
+                        <select id="from_currency"></select>
                     </article>
                 </div>
 
                 <div class="6u">
                     <article class="item">
-                        <input readonly="readonly" type="text" id="to_number"/>
-                        <select id="to_currency">
-                        </select>
+                        <input readonly="readonly" type="text" id="to_number" value="0"/>
+                        <select id="to_currency"></select>
                     </article>
                 </div>
             </div>
@@ -115,6 +113,7 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
                 <div class="12u">
                     <article class="item">
                         <div id="result"></div>
+                        <img height="50" src="images/ajax.GIF" class="d-none" id="image_loader" />
                     </article>
                 </div>
             </div>
@@ -122,7 +121,7 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
             <div class="row">
                 <div class="12u">
                     <article class="item">
-                        <button class="button" type="button" onclick="take_currency()">Convert</button>
+                        <button class="button" type="button" onclick="get_currency_rate()">Convert</button>
                     </article>
                 </div>
             </div>
@@ -136,42 +135,29 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
                 <h2>Documentation</h2>
             </header>
 
-            <p>Currency Converter is a small php application, developed for any person concerned wants
+            <p>Currency Converter is a small php application, developed for any person concerned that wants
                 to see my code's quality.</p>
             <p>
                 There are a lot of ways to build such an easy small project. It could be developed using
-                just html and javascript(jquery, angular), but I have this project as a demo for my php
-                knowledges.
-
-                As it happens mostly to the real world, I have developed this using the Web Service
-                philosophy. Ιn general, Server makes available its services through
-                <a href="http://currencyconverter.xman.gr/Server/index.php?wsdl" target="_blank">wsdl file</a>(s),
-                client connects to server through SOAP.
+                just html and javascript, but I have this project as a demo for my PHP knowledge.
             </p>
             <hr>
             <p>This Application has two parts: Server and Client Part.</p>
-            <p>Server Side makes available this service through
-                <a href="http://currencyconverter.xman.gr/Server/index.php?wsdl" target="_blank">wsdl</a>
-                file. It connects to query.yahooapis.com and submits all queries that receives from client.
-                The way that this application is developed, make it too easy to add/remove currencies.
-                Server uses 2 classes. Class "currencies" is responsible for taking currencies rates
-                from internet and return them. Class "currency_service" is responsible for taking user
-                values, convert them and return them. It's also responsible for running the web service.
-                Available currencies can change from "currency_service" class.
-            </p>
+            <p>Server Side makes available this service through 2 endpoints. Format is json.</p>
+            <ul>
+                <li>Converter: https://currencyconverter.xman.gr/Server/converter.php</li>
+                <li>Publish available currencies: https://currencyconverter.xman.gr/Server/available_currencies.php</li>
+            </ul>
 
-            <p>Client connects to Server through SOAP using PHP. The usage of PHP happens because I
-                had to predict the chance of the client being into a different server and I wouldn't
-                like to make cross-domain ajax connections.<br> When page loads, it connects to Server,
-                for to take the available currencies and put them into the select menus. Then, when
-                user wants a currency conversion, client posts data to server and then show the result.
+            <p>Client sends its requests to Server using PHP. The usage of PHP happens because this is a
+                hypothetical scenario where the client is under a different domain than the Service and I wouldn't
+                like to make cross-domain ajax connections.<br>
+                When page loads, it connects to Server, for to take the available currencies and put them into the select menus.
+                Then, when user wants a currency conversion, client posts data to server and then show the result.
             </p>
-
-            <p>Both Server and Client Sides uses NuSoap Tools.</p>
 
             <p>Hours spent: I needed a few hours for me to find this template and I needed 2 to 3 hours
                 to build the functionalities. </p>
-
         </div>
     </section>
 </div>
@@ -181,17 +167,17 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
     <!-- Copyright -->
     <div class="copyright">
         <ul class="menu">
-            <li>Created: <a href="http://xman.gr">Xatziemmanouil Manolis</a></li>
-            <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+            <li>Created: <a href="https://xman.gr">Manolis Xatziemmanouil</a></li>
+            <li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
         </ul>
     </div>
 </div>
 
-<script src="js/libs/jquery.min.js"></script>
-<script src="js/libs/skel.min.js"></script>
-<script src="js/libs/skel-panels.min.js"></script>
-<script src="js/libs/template-init.js"></script>
-<script src="js/converter.js"></script>
+<script src="/public/js/libs/jquery.min.js"></script>
+<script src="/public/js/libs/skel.min.js"></script>
+<script src="/public/js/libs/skel-panels.min.js"></script>
+<script src="/public/js/libs/template-init.js"></script>
+<script src="/public/js/converter.js"></script>
 
 </body>
 </html>
