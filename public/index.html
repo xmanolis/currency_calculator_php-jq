@@ -15,7 +15,18 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
     <title>Currency Converter</title>
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
     <meta name="author" content="Manolis Xatziemmanouil">
-    <meta http-equiv="Lang" content="en">
+    <meta http-equiv="lang" content="en">
+
+    <meta http-equiv="Content-Security-Policy"
+          content="
+        default-src 'self';
+        script-src 'self';
+        style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+        font-src 'self' https://fonts.gstatic.com;
+        object-src 'none';
+      ">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600" rel="stylesheet" type="text/css"/>
 
     <!--[if lte IE 8]>
@@ -96,7 +107,7 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
             <div class="row">
                 <div class="6u">
                     <article class="item">
-                        <input type="text" value="0" id="from_number" onblur="get_currency_rate()"/>
+                        <input type="text" value="0" id="from_number" />
                         <select id="from_currency"></select>
                     </article>
                 </div>
@@ -113,7 +124,7 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
                 <div class="12u">
                     <article class="item">
                         <div id="result"></div>
-                        <img height="50" src="images/ajax.GIF" class="d-none" id="image_loader" />
+                        <img height="50" src="images/ajax.GIF" class="d-none" id="image_loader"/>
                     </article>
                 </div>
             </div>
@@ -121,7 +132,7 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
             <div class="row">
                 <div class="12u">
                     <article class="item">
-                        <button class="button" type="button" onclick="get_currency_rate()">Convert</button>
+                        <button class="button" type="button" id="converter_button">Convert</button>
                     </article>
                 </div>
             </div>

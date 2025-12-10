@@ -31,7 +31,7 @@ class CurrencyRatesService
     private const ALLOWED_CURRENCIES = ["EUR", "USD", "CHF", "GBP", "JPY", "CAD"];
 
     /**
-     * @return string
+     * @return array
      */
     public function availableCurrencies(): array
     {
@@ -83,7 +83,7 @@ class CurrencyRatesService
      *
      * @return bool
      */
-    protected function checkInputs($amount, $fromCurrency, $toCurrency)
+    protected function checkInputs($amount, $fromCurrency, $toCurrency): bool
     {
         $validationFlag = false;
         if (is_numeric($amount) &&

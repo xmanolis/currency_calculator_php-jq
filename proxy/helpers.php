@@ -1,5 +1,5 @@
 <?php
-function validateAmount($amount)
+function validateNumber($amount)
 {
     if (is_numeric($amount) && $amount > 0) {
         return true;

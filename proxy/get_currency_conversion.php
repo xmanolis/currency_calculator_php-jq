@@ -13,10 +13,10 @@ $amount       = $_GET['AMOUNT'] ?? '';
 $fromCurrency = $_GET['FROM_CURRENCY'] ?? '';
 $toCurrency   = $_GET['TO_CURRENCY'] ?? '';
 
-if (!validateAmount($amount) || !validateCurrency($fromCurrency) || !validateCurrency($toCurrency)) {
+if (!validateNumber($amount) || !validateCurrency($fromCurrency) || !validateCurrency($toCurrency)) {
     echo json_encode([
         'success' => false,
-        'error'   => 'Invalid input format'
+        'message' => 'Invalid input format'
     ]);
     exit;
 }
@@ -24,7 +24,7 @@ if (!validateAmount($amount) || !validateCurrency($fromCurrency) || !validateCur
 $params    = [
     'FROM_CURRENCY' => $fromCurrency,
     'TO_CURRENCY'   => $toCurrency,
-    'AMOUNT'       => $amount
+    'AMOUNT'        => $amount
 ];
 $remoteUrl = 'https://currencyconverter.xman.gr/service/converter.php?'.http_build_query($params);
 
@@ -45,7 +45,7 @@ $response = file_get_contents($remoteUrl, false, $context);
 if ($response === false) {
     echo json_encode([
         'success' => false,
-        'error'   => 'Remote service unreachable'
+        'message' => 'Remote service unreachable'
     ]);
     exit;
 }
@@ -55,7 +55,7 @@ $data = json_decode($response, true);
 if (!is_array($data)) {
     echo json_encode([
         'success' => false,
-        'error'   => 'Invalid JSON received from remote service'
+        'message' => 'Invalid JSON received from remote service'
     ]);
     exit;
 }
